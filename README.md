@@ -1,10 +1,6 @@
 ### [1. Задание PostgreSql](#PostgreSql)
 
-
-
-
-
-
+## <a name="1. PostgreSql">Задание PostgreSql</a> 
 
 Есть таблица users, user_carts, orders, order_items
 
@@ -87,7 +83,6 @@ user.id , user.name , orders.id , order_items.id, order_items.name, orders.creat
     
 <img width="675" alt="Pasted Graphic 1" src="https://user-images.githubusercontent.com/63869857/201619994-30909297-c3b0-4173-92ac-f4411f96a30f.png">
     
-## <a name="PostgreSql">Задание PostgreSql</a> 
     
 Написать запрос для вывода одной таблицы, которая содержит эти данные:
 user.id , user.name , orders.id , order_items.id, order_items.name, orders.created_at
