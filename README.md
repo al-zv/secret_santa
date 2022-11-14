@@ -1,6 +1,15 @@
 ### [1. Задание PostgreSql](#PostgreSql)
 
 ### [2. Задание Laravel](#Laravel)
+### [Инструкция по запуску проекта](#21)
+### [Работа с проектом](#22)
+### [Код проекта](#23)
+#### [Миграции](#24)
+#### [Сидеры](#25)
+#### [Маршруты](#26)
+#### [Модели](#27)
+#### [Контроллеры](#28)
+### [Что можно улучшить](#29)
 
 ## <a name="PostgreSql">1. Задание PostgreSql</a> 
 
@@ -127,6 +136,7 @@ user.id , user.name , orders.id , order_items.id, order_items.name, orders.creat
 "Тайный Санта", он же Secret Santa, - анонимный способ дарить подарки. Идея проста: в большой компании каждому достаётся один "подопечный",
 которому нужно придумать подарок. Сам даритель при этом остаётся тем самым "тайным Сантой".
 
+### <a name="21">Инструкция по запуску проекта</a> 
 ## Инструкция по запуску проекта
 
 Скачать с GitHub
@@ -145,6 +155,7 @@ user.id , user.name , orders.id , order_items.id, order_items.name, orders.creat
 
     ./vendor/bin/sail artisan db:seed
 
+### <a name="22">Работа с проектом</a> 
 ## Работа с проектом
 
 Запустить get запрос, который по переданному в get параметре id участника вернёт json информацию о подопечном (поля записи из таблицы) и о самом участнике.
@@ -163,8 +174,10 @@ user.id , user.name , orders.id , order_items.id, order_items.name, orders.creat
 
 <img width="856" alt="image" src="https://user-images.githubusercontent.com/63869857/201638139-833cc80e-deda-4328-9600-39b17332aab4.png">
 
+### <a name="23">Код проекта</a>
 ## Код проекта
 
+#### <a name="24">Миграции</a>
 ### Миграции
 
 *файл secret_santa/database/migrations/2022_11_13_123754_create_members_table.php*
@@ -201,7 +214,8 @@ user.id , user.name , orders.id , order_items.id, order_items.name, orders.creat
             $table->timestamps();
         });
     }
-    
+ 
+ #### <a name="25">Сидеры</a>
  ### Сидеры
  
  *файл secret_santa/database/seeders/DatabaseSeeder.php*
@@ -268,6 +282,7 @@ user.id , user.name , orders.id , order_items.id, order_items.name, orders.creat
         }
     }
 
+#### <a name="26">Маршруты</a>
 ### Маршруты
 
 *файл secret_santa/routes/api.php*
@@ -276,6 +291,7 @@ user.id , user.name , orders.id , order_items.id, order_items.name, orders.creat
     
     Route::get('/{id}', [SecretSantaController::class, 'get']);
 
+#### <a name="27">Модели</a>
 ### Модели
 
 *файл secret_santa/app/Models/Member.php*
@@ -310,6 +326,7 @@ user.id , user.name , orders.id , order_items.id, order_items.name, orders.creat
     }
 }
 
+#### <a name="28">Контроллеры</a>
 ### Контроллеры
 
 *файл secret_santa/app/Http/Controllers/MemberController.php*
@@ -350,6 +367,7 @@ user.id , user.name , orders.id , order_items.id, order_items.name, orders.creat
         }
     }
 
+### <a name="29">Что можно улучшить</a>
 ### Что можно улучшить
 
 - Сделать таблицу многие ко многим участник_подопечный. (Получается будут таблицы участники, подопечные, и участник_подопечный)
