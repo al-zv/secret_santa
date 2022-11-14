@@ -1,6 +1,6 @@
 ### [1. Задание PostgreSql](#PostgreSql)
 
-## <a name="1. PostgreSql">Задание PostgreSql</a> 
+## <a name="PostgreSql">1. Задание PostgreSql</a> 
 
 Есть таблица users, user_carts, orders, order_items
 
