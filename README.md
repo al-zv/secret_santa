@@ -167,7 +167,7 @@ user.id , user.name , orders.id , order_items.id, order_items.name, orders.creat
 
 ### Миграции
 
-______
+*файл secret_santa/database/migrations/2022_11_13_123754_create_members_table.php*
 
      /**
      * Таблица участников.
@@ -185,7 +185,7 @@ ______
         });
     }
     
-_______ 
+*файл secret_santa/database/migrations/2022_11_13_140201_create_secret_santas_table.php*
     
      /**
      * Таблица подопечных.
@@ -204,6 +204,8 @@ _______
     
  ### Сидеры
  
+ *файл secret_santa/database/seeders/DatabaseSeeder.php*
+ 
     class DatabaseSeeder extends Seeder
     {
         /**
@@ -218,7 +220,7 @@ _______
         }
     }
     
- _____
+*файл secret_santa/database/seeders/MemberSeeder.php*
  
     class MemberSeeder extends Seeder
     {
@@ -241,7 +243,7 @@ _______
         }
     }
     
-______
+*файл secret_santa/database/seeders/SecretSantaSeeder.php*
 
     class SecretSantaSeeder extends Seeder
     {
@@ -268,7 +270,7 @@ ______
 
 ### Маршруты
 
-___ /routes/api.php 
+*файл secret_santa/routes/api.php*
 
     Route::get('/members', [MemberController::class, 'show']);
     
@@ -276,7 +278,7 @@ ___ /routes/api.php
 
 ### Модели
 
-____
+*файл secret_santa/app/Models/Member.php*
 
     class Member extends Model
     {
@@ -292,7 +294,7 @@ ____
         }
     }
     
- ____
+ *файл secret_santa/app/Models/SecretSanta.php*
  
  class SecretSanta extends Model
 {
@@ -310,7 +312,7 @@ ____
 
 ### Контроллеры
 
-_____
+*файл secret_santa/app/Http/Controllers/MemberController.php*
 
     class MemberController extends Controller
     {
@@ -327,7 +329,7 @@ _____
         }
     }
     
-______
+*файл secret_santa/app/Http/Controllers/SecretSantaController.php*
 
     class SecretSantaController extends Controller
     {
