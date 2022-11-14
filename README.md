@@ -1,15 +1,15 @@
 ### [1. Задание PostgreSql](#PostgreSql)
 
 ### [2. Задание Laravel](#Laravel)
-#### [Инструкция по запуску проекта](#21)
-#### [Работа с проектом](#22)
-#### [Код проекта](#23)
-#### [Миграции](#24)
-#### [Сидеры](#25)
-#### [Маршруты](#26)
-#### [Модели](#27)
-#### [Контроллеры](#28)
-#### [Что можно улучшить](#29)
+#### [2.1. Инструкция по запуску проекта](#21)
+#### [2.2. Работа с проектом](#22)
+#### [2.3. Код проекта](#23)
+#### [2.3.1. Миграции](#24)
+#### [2.3.2. Сидеры](#25)
+#### [2.3.3. Маршруты](#26)
+#### [2.3.4. Модели](#27)
+#### [2.3.5. Контроллеры](#28)
+#### [2.4. Что можно улучшить](#29)
 
 ## <a name="PostgreSql">1. Задание PostgreSql</a> 
 
@@ -136,8 +136,7 @@ user.id , user.name , orders.id , order_items.id, order_items.name, orders.creat
 "Тайный Санта", он же Secret Santa, - анонимный способ дарить подарки. Идея проста: в большой компании каждому достаётся один "подопечный",
 которому нужно придумать подарок. Сам даритель при этом остаётся тем самым "тайным Сантой".
 
-### <a name="21">Инструкция по запуску проекта</a> 
-## Инструкция по запуску проекта
+### <a name="21">2.1. Инструкция по запуску проекта</a> 
 
 Скачать с GitHub
 
@@ -155,8 +154,7 @@ user.id , user.name , orders.id , order_items.id, order_items.name, orders.creat
 
     ./vendor/bin/sail artisan db:seed
 
-### <a name="22">Работа с проектом</a> 
-## Работа с проектом
+### <a name="22">2.2. Работа с проектом</a> 
 
 Запустить get запрос, который по переданному в get параметре id участника вернёт json информацию о подопечном (поля записи из таблицы) и о самом участнике.
 
@@ -174,11 +172,9 @@ user.id , user.name , orders.id , order_items.id, order_items.name, orders.creat
 
 <img width="856" alt="image" src="https://user-images.githubusercontent.com/63869857/201638139-833cc80e-deda-4328-9600-39b17332aab4.png">
 
-### <a name="23">Код проекта</a>
-## Код проекта
+### <a name="23">2.3. Код проекта</a>
 
-#### <a name="24">Миграции</a>
-### Миграции
+#### <a name="24">2.3.1. Миграции</a>
 
 *файл secret_santa/database/migrations/2022_11_13_123754_create_members_table.php*
 
@@ -215,8 +211,7 @@ user.id , user.name , orders.id , order_items.id, order_items.name, orders.creat
         });
     }
  
- #### <a name="25">Сидеры</a>
- ### Сидеры
+ #### <a name="25">2.3.2. Сидеры</a>
  
  *файл secret_santa/database/seeders/DatabaseSeeder.php*
  
@@ -282,8 +277,7 @@ user.id , user.name , orders.id , order_items.id, order_items.name, orders.creat
         }
     }
 
-#### <a name="26">Маршруты</a>
-### Маршруты
+#### <a name="26">2.3.3. Маршруты</a>
 
 *файл secret_santa/routes/api.php*
 
@@ -291,8 +285,7 @@ user.id , user.name , orders.id , order_items.id, order_items.name, orders.creat
     
     Route::get('/{id}', [SecretSantaController::class, 'get']);
 
-#### <a name="27">Модели</a>
-### Модели
+#### <a name="27">2.3.4. Модели</a>
 
 *файл secret_santa/app/Models/Member.php*
 
@@ -326,8 +319,7 @@ user.id , user.name , orders.id , order_items.id, order_items.name, orders.creat
     }
 }
 
-#### <a name="28">Контроллеры</a>
-### Контроллеры
+#### <a name="28">2.3.5. Контроллеры</a>
 
 *файл secret_santa/app/Http/Controllers/MemberController.php*
 
@@ -367,8 +359,7 @@ user.id , user.name , orders.id , order_items.id, order_items.name, orders.creat
         }
     }
 
-### <a name="29">Что можно улучшить</a>
-### Что можно улучшить
+### <a name="29">2.4. Что можно улучшить</a>
 
 - Сделать таблицу многие ко многим участник_подопечный. (Получается будут таблицы участники, подопечные, и участник_подопечный)
 - Убрать из docker лишние образы.
