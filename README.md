@@ -87,7 +87,7 @@ user.id , user.name , orders.id , order_items.id, order_items.name, orders.creat
     
 <img width="675" alt="Pasted Graphic 1" src="https://user-images.githubusercontent.com/63869857/201619994-30909297-c3b0-4173-92ac-f4411f96a30f.png">
     
-    ## <a name="Задание PostgreSql">ff</a> 
+<a name="Задание PostgreSql">ff</a> 
 ## Задание PostgreSql
     
 Написать запрос для вывода одной таблицы, которая содержит эти данные:
