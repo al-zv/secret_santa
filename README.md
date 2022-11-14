@@ -268,6 +268,8 @@ ______
 
 ### Маршруты
 
+___ /routes/api.php 
+
     Route::get('/members', [MemberController::class, 'show']);
     
     Route::get('/{id}', [SecretSantaController::class, 'get']);
