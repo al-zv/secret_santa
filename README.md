@@ -1,5 +1,3 @@
-### [1. Задание PostgreSql](#PostgreSql)
-
 ### [Проект на Laravel: реализация логики работы игры "Тайный санта"](#Laravel)
 #### [1. Инструкция по запуску проекта](#21)
 #### [2. Работа с проектом](#22)
@@ -10,110 +8,6 @@
 #### [3.4. Модели](#27)
 #### [3.5. Контроллеры](#28)
 #### [4. Что можно улучшить](#29)
-
-## <a name="PostgreSql">1. Задание PostgreSql</a> 
-
-Есть таблица users, user_carts, orders, order_items
-
-Реализовать связь этих таблиц.
-
-Написать запрос создания всех 4 таблиц со связями.
-
-Написать запрос добавления тестовых данных в эти таблицы.
-
-Написать запрос для вывода одной таблицы, которая содержит эти данные:
-
-user.id , user.name , orders.id , order_items.id, order_items.name, orders.created_at
-
-Написать запрос удаления. Запрос должен удалять пользователя, корзину и все его заказы. DELETE FROM users WHERE id = 1;
-
-
-## Решение
-
-Написать запрос создания всех 4 таблиц со связями.
-
-    CREATE TABLE users (
-      id integer PRIMARY KEY,
-      name varchar (100)
-    );
-
-    CREATE TABLE user_carts (
-      id integer PRIMARY KEY,
-      user_id integer REFERENCES users ON DELETE CASCADE,
-      name varchar (150),
-      count integer
-    );
-
-    CREATE TABLE orders (
-      id integer PRIMARY KEY,
-      user_id integer REFERENCES users ON DELETE CASCADE,
-      order_number integer,
-      created_at timestamp
-    );
-    
-    CREATE TABLE order_items (
-      id integer PRIMARY KEY,
-      order_id integer REFERENCES orders ON DELETE CASCADE,
-      name varchar (150),
-      count integer
-    );
-
-<img width="570" alt="CREATE TABLE users" src="https://user-images.githubusercontent.com/63869857/201619442-e5c763df-2bcf-4338-a166-2a0519e99842.png">
-
-
-Написать запрос добавления тестовых данных в эти таблицы.
-
-    INSERT INTO users VALUES 
-      (1, 'Mark'),
-      (2, 'Петр'),
-      (3, 'Евгений');
-
-    INSERT INTO user_carts VALUES 
-      (1, 1, 'телефон', 1),
-      (2, 1, 'ноутбук', 1),
-      (3, 2, 'часы', 1),
-      (4, 2, 'флешка', 2),
-      (5, 3, 'видеокамера', 1);
-      
-    INSERT INTO orders VALUES 
-      (1, 1, 1114, '2022-11-13 18:23:54+05'),
-      (2, 2, 1214, '2022-11-13 21:23:54+05'),
-      (3, 2,  12141, '2022-11-14 08:23:54+05'),
-      (4, 3,  1314, '2022-11-14 10:31:54+05');
-      
-    INSERT INTO order_items VALUES 
-      (1, 1, 'холодильник', 1),
-      (2, 1, 'морозильная установка', 1),
-      (3, 1, 'хладагент', 2),
-      (4, 2, 'принтер', 1),
-      (5, 3, 'картридж аа33', 1),
-      (6, 4, 'мотолок', 5),
-      (7, 4, 'набор инструментов', 2),
-      (8, 4, 'бензопила', 3),
-      (9, 4, 'сварочный аппарат', 1);  
-    
-<img width="675" alt="Pasted Graphic 1" src="https://user-images.githubusercontent.com/63869857/201619994-30909297-c3b0-4173-92ac-f4411f96a30f.png">
-    
-    
-Написать запрос для вывода одной таблицы, которая содержит эти данные:
-user.id , user.name , orders.id , order_items.id, order_items.name, orders.created_at
-
-    SELECT users.id as users_id, users.name as users_name, 
-      orders.id as orders_id, order_items.id as order_items_id, 
-      order_items.name as order_items_name, orders.created_at as orders_created_at 
-      FROM users, orders, order_items 
-      WHERE users.id = orders.user_id AND orders.id = order_items.order_id;
-    
-<img width="878" alt="Pasted Graphic 2" src="https://user-images.githubusercontent.com/63869857/201620421-50e1e9bc-e95a-4a3a-84db-0494eaa9a807.png">
-
-
-Написать запрос удаления. Запрос должен удалять пользователя, корзину и все его заказы. DELETE FROM users WHERE id = 1;
-
-   DELETE FROM users WHERE id = 1;
-   
-   
-<img width="878" alt="Pasted Graphic 3" src="https://user-images.githubusercontent.com/63869857/201621203-ccceff4b-3a20-43bc-b869-7f080c0bd4ef.png">
-
 
 ## <a name="Laravel">Проект на Laravel: реализация логики работы игры "Тайный санта"</a> 
 
@@ -136,7 +30,7 @@ user.id , user.name , orders.id , order_items.id, order_items.name, orders.creat
 "Тайный Санта", он же Secret Santa, - анонимный способ дарить подарки. Идея проста: в большой компании каждому достаётся один "подопечный",
 которому нужно придумать подарок. Сам даритель при этом остаётся тем самым "тайным Сантой".
 
-### <a name="21">2.1. Инструкция по запуску проекта</a> 
+### <a name="21">1. Инструкция по запуску проекта</a> 
 
 Скачать с GitHub
 
@@ -154,7 +48,7 @@ user.id , user.name , orders.id , order_items.id, order_items.name, orders.creat
 
     ./vendor/bin/sail artisan db:seed
 
-### <a name="22">2.2. Работа с проектом</a> 
+### <a name="22">2. Работа с проектом</a> 
 
 Запустить get запрос, который по переданному в get параметру id участника вернёт json информацию о подопечном (поля записи из таблицы) и о самом участнике.
 
@@ -172,9 +66,9 @@ user.id , user.name , orders.id , order_items.id, order_items.name, orders.creat
 
 <img width="856" alt="image" src="https://user-images.githubusercontent.com/63869857/201638139-833cc80e-deda-4328-9600-39b17332aab4.png">
 
-### <a name="23">2.3. Код проекта</a>
+### <a name="23">3. Код проекта</a>
 
-#### <a name="24">2.3.1. Миграции</a>
+#### <a name="24">3.1. Миграции</a>
 
 *файл secret_santa/database/migrations/2022_11_13_123754_create_members_table.php*
 
@@ -211,7 +105,7 @@ user.id , user.name , orders.id , order_items.id, order_items.name, orders.creat
         });
     }
  
- #### <a name="25">2.3.2. Сидеры</a>
+ #### <a name="25">3.2. Сидеры</a>
  
  *файл secret_santa/database/seeders/DatabaseSeeder.php*
  
@@ -277,7 +171,7 @@ user.id , user.name , orders.id , order_items.id, order_items.name, orders.creat
         }
     }
 
-#### <a name="26">2.3.3. Маршруты</a>
+#### <a name="26">3.3. Маршруты</a>
 
 *файл secret_santa/routes/api.php*
 
@@ -285,7 +179,7 @@ user.id , user.name , orders.id , order_items.id, order_items.name, orders.creat
     
     Route::get('/{id}', [SecretSantaController::class, 'get']);
 
-#### <a name="27">2.3.4. Модели</a>
+#### <a name="27">3.4. Модели</a>
 
 *файл secret_santa/app/Models/Member.php*
 
@@ -319,7 +213,7 @@ user.id , user.name , orders.id , order_items.id, order_items.name, orders.creat
     }
 }
 
-#### <a name="28">2.3.5. Контроллеры</a>
+#### <a name="28">3.5. Контроллеры</a>
 
 *файл secret_santa/app/Http/Controllers/MemberController.php*
 
@@ -359,7 +253,7 @@ user.id , user.name , orders.id , order_items.id, order_items.name, orders.creat
         }
     }
 
-### <a name="29">2.4. Что можно улучшить</a>
+### <a name="29">4. Что можно улучшить</a>
 
 - Сделать таблицу многие ко многим участник_подопечный. (Получается будут таблицы участники, подопечные, и участник_подопечный)
 - Убрать из docker лишние образы.
