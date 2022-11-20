@@ -304,16 +304,16 @@
 
 - в модели по умолчанию дабавлены строчки (use Illuminate\Database\Eloquent\Factories\HasFactory и use HasFactory), которые применяются для применения фабрики через модели):
 
-    namespace App\Models;
+        namespace App\Models;
 
-    use Illuminate\Database\Eloquent\Factories\HasFactory;
-    use Illuminate\Database\Eloquent\Model;
-    use App\Models\SecretSanta;
+        use Illuminate\Database\Eloquent\Factories\HasFactory;
+        use Illuminate\Database\Eloquent\Model;
+        use App\Models\SecretSanta;
 
-    class Member extends Model
-    {
-        use HasFactory;
-    }
+        class Member extends Model
+        {
+            use HasFactory;
+        }
 
 - в сидере через модель заполняются фейковые данные в таблице БД:
 
