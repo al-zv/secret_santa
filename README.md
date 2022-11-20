@@ -8,6 +8,8 @@
 #### [3.4. Модели](#27)
 #### [3.5. Контроллеры](#28)
 #### [4. Что можно улучшить](#29)
+#### [5. Добавлено в проект](#30)
+#### [5.1. Заполнение фейковыми данными через фабрики](#31)
 
 ## <a name="Laravel">Проект на Laravel: реализация логики работы игры "Тайный санта"</a> 
 
@@ -259,3 +261,84 @@
 - Убрать из docker лишние образы.
 - Заполнить данные об участниках в понимаемом человеку виде (вроде это можно через фабрики сделать).
 - Применить фабрики для заполнения данных.
+
+### <a name="30">5. Добавлено в проект</a>
+
+### <a name="31">5.1. Заполнение фейковыми данными через фабрики</a>
+
+Применение фабрик для заполнения фейковыми данными таблиц БД через Seeder (библиотека FakerPHP).
+
+Как работает механизм заполнения фейковыми данными через фабрики
+
+- создание фабрики (название должно быть аналогично модели):
+
+    ./vendor/bin/sail artisan make:factory Member
+    
+- программирование фабрики:
+
+*файл secret_santa/database/factories/MemberFactory.php*
+
+    namespace Database\Factories;
+
+    use Illuminate\Database\Eloquent\Factories\Factory;
+
+    /**
+     * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Member>
+     */
+    class MemberFactory extends Factory
+    {
+        /**
+         * Define the model's default state.
+         *
+         * @return array<string, mixed>
+         */
+        public function definition()
+        {
+            return [
+                'name' => $this->faker->name(),
+                'profession' => $this->faker->word(),
+                'desired_gift' => $this->faker->word(),
+            ];
+        }
+    }
+
+- в модели по умолчанию дабавлены строчки (use Illuminate\Database\Eloquent\Factories\HasFactory и use HasFactory), которые применяются для применения фабрики через модели):
+
+    namespace App\Models;
+
+    use Illuminate\Database\Eloquent\Factories\HasFactory;
+    use Illuminate\Database\Eloquent\Model;
+    use App\Models\SecretSanta;
+
+    class Member extends Model
+    {
+        use HasFactory;
+    }
+
+- в сидере через модель заполняются фейковые данные в таблице БД:
+
+*файл secret_santa/app/Models/Member.php*
+
+    namespace Database\Seeders;
+
+    use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+    use Illuminate\Database\Seeder;
+    use Illuminate\Support\Facades\DB;
+    use Illuminate\Support\Str;
+    use App\Models\Member;
+
+    class MemberSeeder extends Seeder
+    {
+        /**
+         * Заполняются 40 участников, для формирования имени, профессии
+         *  и желаемого подарка применяется фабрика, которая использует библиотеку FakerPHP.
+         *
+         * @return void
+         */
+        public function run()
+        {        
+            Member::factory()
+                    ->count(40)
+                    ->create();
+        }
+    }
